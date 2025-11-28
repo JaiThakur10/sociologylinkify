@@ -36,10 +36,6 @@ export default function Page() {
       <div className="max-w-4xl mx-auto px-6 py-14">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-[#121212] rounded-3xl mb-6 shadow-[0_0_25px_rgba(255,255,255,0.06)] border border-[#1f1f1f]">
-            <BookOpen className="w-10 h-10 text-white/80" />
-          </div>
-
           <h1 className="text-5xl font-bold mb-3 text-white tracking-tight">
             Your Problem Links
           </h1>
@@ -66,7 +62,7 @@ export default function Page() {
               >
                 {/* Thin subtle top highlight */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r
+                  className="absolute top-0 left-0 right-0 h-px bg-linear-to-r
                                 from-transparent via-white/10 to-transparent opacity-30 group-hover:opacity-60 transition-opacity"
                 ></div>
 
