@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { ExternalLink, BookOpen } from "lucide-react";
 
 export default function Page() {
   const [items, setItems] = useState([]);
@@ -31,29 +32,103 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Links to your Problems
-      </h1>
+    <div className="min-h-screen bg-[#0b0b0b] text-white">
+      <div className="max-w-4xl mx-auto px-6 py-14">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-[#121212] rounded-3xl mb-6 shadow-[0_0_25px_rgba(255,255,255,0.06)] border border-[#1f1f1f]">
+            <BookOpen className="w-10 h-10 text-white/80" />
+          </div>
 
-      <div className="flex flex-col gap-4">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className="p-5  border rounded-xl shadow-sm hover:shadow-md transition bg-white"
-          >
-            <h3 className="text-xl text-black font-semibold mb-2">
-              {item.heading}
-            </h3>
+          <h1 className="text-5xl font-bold mb-3 text-white tracking-tight">
+            Your Problem Links
+          </h1>
+          <p className="text-neutral-400 text-lg">
+            Quick access to all your resources
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid gap-6">
+          {items.map((item, i) => (
             <a
+              key={i}
               href={item.link}
               target="_blank"
-              className="inline-block mt-2 text-blue-600 font-medium hover:underline"
+              rel="noopener noreferrer"
+              className="group block"
             >
-              Open →
+              <div
+                className="relative bg-[#111111] border border-[#1d1d1d] rounded-2xl p-6 transition-all duration-200
+                              shadow-[0_0_10px_rgba(0,0,0,0.5)]
+                              hover:border-[#2c2c2c] hover:shadow-[0_0_30px_rgba(255,255,255,0.06)]
+                              hover:-translate-y-[3px]"
+              >
+                {/* Thin subtle top highlight */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r
+                                from-transparent via-white/10 to-transparent opacity-30 group-hover:opacity-60 transition-opacity"
+                ></div>
+
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3
+                      className="text-xl font-semibold text-white mb-2
+                                   group-hover:text-white/90 transition-colors"
+                    >
+                      {item.heading}
+                    </h3>
+
+                    <p className="text-sm text-neutral-500 flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      Click to open resource
+                    </p>
+                  </div>
+
+                  {/* Icon bubble */}
+                  <div
+                    className="shrink-0 w-12 h-12 bg-[#181818] border border-[#2a2a2a]
+                                  group-hover:border-[#3a3a3a]
+                                  rounded-xl flex items-center justify-center transition-all
+                                  shadow-[0_0_6px_rgba(0,0,0,0.4)]
+                                  group-hover:shadow-[0_0_15px_rgba(255,255,255,0.08)]"
+                  >
+                    <svg
+                      className="w-6 h-6 text-neutral-400 group-hover:text-white transition-colors"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </a>
+          ))}
+        </div>
+
+        {/* Empty state */}
+        {items.length === 0 && (
+          <div className="text-center py-20">
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-[#111111] rounded-full mb-4 border border-[#1c1c1c]">
+              <BookOpen className="w-12 h-12 text-neutral-600" />
+            </div>
+            <p className="text-neutral-500 text-lg">Loading your links...</p>
           </div>
-        ))}
+        )}
+
+        {/* Footer */}
+        <div className="mt-16 text-center text-neutral-600">
+          <p className="text-sm">
+            {items.length} {items.length === 1 ? "link" : "links"} available
+          </p>
+        </div>
       </div>
     </div>
   );
